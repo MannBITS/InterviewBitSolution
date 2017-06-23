@@ -1,0 +1,34 @@
+/*
+Find the contiguous subarray within an array (containing at least one number) which has the largest sum.
+*/
+
+int Solution::maxSubArray(const vector<int> &a) {
+    // Do not write main() function.
+    // Do not read input, instead use the arguments to the function.
+    // Do not print the output, instead return values as specified
+    // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
+    stack<int> s;
+    int current_max=0;
+    int size=a.size();
+    for(int i=0;i<size;i++)
+    {
+        if(i==0)
+            {
+                s.push(a[i]);
+                current_max=a[i];
+                
+            }
+        else{
+            int runningsum=s.top()+a[i];
+            if(runningsum>a[i])
+                s.push(runningsum);
+            else 
+                s.push(a[i]);
+            if(runningsum>=a[i] && runningsum>current_max)
+                current_max=runningsum;
+            else if(a[i]>=runningsum && a[i]>current_max)
+                current_max=a[i];
+            }    
+    }
+    return current_max;
+}
